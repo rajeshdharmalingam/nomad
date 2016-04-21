@@ -1,0 +1,31 @@
+job "sample" {
+
+        datacenters = ["dc1"]
+        update {
+                stagger = "10s"
+                max_parallel = 1
+        }
+        group "web" {
+                task "tomcat" {
+                        driver = "exec"
+                        config {
+                                #port_map {
+                                #        db = 6379
+                                #}
+                                command = "tar -xvzf sample-tomcat.tar.gz && cd sample-tomcat && tar -xvzf apache-tomcat-7.0.42.tar.gz && mv sample.war apache-tomcat-7.0.42/webapps && cd apache-tomcat-7.0.42 && ./bin/catalina.sh run -config ./conf/server.xml"
+                        }
+                        artifact {
+                                source = "http://jumpbox/sample-tomcat.tar.gz"
+                        }
+                        resources {
+                                cpu = 500 # 500 Mhz
+                                memory = 256 # 256MB
+                                network {
+                                        mbits = 10
+                                        port "tomcat" {
+                                        }
+                                }
+                        }
+                }
+        }
+}
