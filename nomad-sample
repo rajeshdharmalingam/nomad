@@ -9,20 +9,19 @@ job "sample" {
                 task "tomcat" {
                         driver = "exec"
                         config {
-                                #port_map {
-                                #        db = 6379
-                                #}
                                 command = "test"
                         }
                         artifact {
-                                source = "http://zjumpbox01.slv.zuora/sample-tomcat/test"
+                                source = "http://zjumpbox01.slv.zuora/~dba/cgi-bin/sample-tomcat/test"
                         }
                         resources {
-                                cpu = 500 # 500 Mhz
+                                cpu = 500
                                 memory = 2560 # 256MB
+                                disk = 2560 # 256MB
                                 network {
                                         mbits = 10
                                         port "tomcat" {
+                                            static = 8080
                                         }
                                 }
                         }
