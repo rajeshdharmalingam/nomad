@@ -12,7 +12,7 @@ job "sample" {
                                 #port_map {
                                 #        db = 6379
                                 #}
-                                command = "bash ./test"
+                                command = "test"
                         }
                         artifact {
                                 source = "http://zjumpbox01.slv.zuora/sample-tomcat/test"
