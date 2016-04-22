@@ -12,14 +12,14 @@ job "sample" {
                                 #port_map {
                                 #        db = 6379
                                 #}
-                                command = "tar -xvzf sample-tomcat.tar.gz && cd sample-tomcat && tar -xvzf apache-tomcat-7.0.42.tar.gz && mv sample.war apache-tomcat-7.0.42/webapps && cd apache-tomcat-7.0.42 && ./bin/catalina.sh run -config ./conf/server.xml"
+                                command = "bash ./test"
                         }
                         artifact {
-                                source = "http://jumpbox/sample-tomcat.tar.gz"
+                                source = "http://zjumpbox01.slv.zuora/sample-tomcat/test"
                         }
                         resources {
                                 cpu = 500 # 500 Mhz
-                                memory = 256 # 256MB
+                                memory = 2560 # 256MB
                                 network {
                                         mbits = 10
                                         port "tomcat" {
