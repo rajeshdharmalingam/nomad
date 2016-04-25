@@ -15,13 +15,13 @@ job "sample" {
                                 source = "http://zjumpbox01.slv.zuora/~dba/cgi-bin/sample-tomcat/test"
                         }
                         resources {
-                                cpu = 500
+                                cpu = 700
                                 memory = 2560 # 256MB
                                 disk = 2560 # 256MB
                                 network {
                                         mbits = 10
                                         port "tomcat" {
-                                            static = 8080
+                                            #static = 8080
                                         }
                                 }
                         }
