@@ -1,7 +1,14 @@
 #!/bin/bash
 
+rm -rf *.tar.gz
+rm -rf *.war
 wget http://zjumpbox01.slv.zuora/~dba/cgi-bin/sample-tomcat.tar.gz
-#sudo apt-get install default-jre -y
+sudo apt-get install default-jre -y
 which java >> test-java
-tar -xvzf sample-tomcat.tar.gz && cd sample-tomcat && tar -xvzf apache-tomcat-7.0.42.tar.gz && mv ./sample.war ./apache-tomcat-7.0.42/webapps && cd ./apache-tomcat-7.0.42 && nohup ./bin/catalina.sh run -config ./conf/server.xml > nohup.out 2>&1 &
+tar -xvzf sample-tomcat.tar.gz
+cd sample-tomcat
+tar -xvzf apache-tomcat-7.0.42.tar.gz
+mv ./sample.war ./apache-tomcat-7.0.42/webapps
+cd ./apache-tomcat-7.0.42
+./bin/catalina.sh run -config ./conf/server.xml
 env >> test-env
