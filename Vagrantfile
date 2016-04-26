@@ -4,7 +4,7 @@
 $script = <<SCRIPT
 # Update apt and get dependencies
 sudo apt-get update
-sudo apt-get install -y unzip curl wget vim
+sudo apt-get install -y unzip curl wget vim tar default-jre
 
 # Download Nomad
 echo Fetching Nomad...
@@ -39,7 +39,7 @@ Vagrant.configure(2) do |config|
   end
 
   # Increase memory for VMware
-    ["vmware_fusion", "vmware_workstation"].each do |p|
+  ["vmware_fusion", "vmware_workstation"].each do |p|
     config.vm.provider p do |v|
       v.vmx["memsize"] = "4000"
     end
