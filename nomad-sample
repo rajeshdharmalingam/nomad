@@ -1,33 +1,40 @@
-job "sample" {
+job "demo" {
+  datacenters = ["dc1"]
 
-        datacenters = ["dc1"]
-        update {
-                stagger = "10s"
-                max_parallel = 1
+  update {
+    stagger = "10s"
+    max_parallel = 1
+  }
+
+  group "web" {
+    task "tomcat" {
+      driver = "exec"
+
+      config {
+        command = "test"
+      }
+
+      artifact {
+        source = "http://zjumpbox01.slv.zuora/~dba/cgi-bin/sample-tomcat/test"
+      }
+
+      resources {
+        cpu = 700
+        memory = 2560 # 256MB
+        disk = 2560 # 256MB
+
+        network {
+          mbits = 10
+
+          port "tomcat" {
+          }
         }
-        group "web" {
-                task "tomcat" {
-                        driver = "exec"
-                        config {
-                                command = "test"
-                        }
-                        artifact {
-                                source = "http://zjumpbox01.slv.zuora/~dba/cgi-bin/sample-tomcat/test"
-                        }
-                        resources {
-                                cpu = 700
-                                memory = 2560 # 256MB
-                                disk = 2560 # 256MB
-                                network {
-                                        mbits = 10
-                                        port "tomcat" {
-                                        }
-                                }
-                        }
-                        logs {
-                             max_files     = 1
-                             max_file_size = 5
-                        }
-                }
-        }
+      }
+
+      logs {
+        max_files     = 1
+        max_file_size = 5
+      }
+    }
+  }
 }
