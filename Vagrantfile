@@ -37,7 +37,7 @@ Vagrant.configure(2) do |config|
   config.vm.provider "virtualbox" do |vb|
     vb.customize ["modifyvm", :id, "--memory", "4048", "--cpus", "4"]
   end
-
+  
   # Increase memory for VMware
   ["vmware_fusion", "vmware_workstation"].each do |p|
     config.vm.provider p do |v|
