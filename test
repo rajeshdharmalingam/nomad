@@ -15,9 +15,7 @@ wget http://zjumpbox01.slv.zuora/~dba/cgi-bin/sample-tomcat/sample.war
 #cd sample-tomcat
 echo "$DT: Unzipping apache-tomcat-7.0.42.tar.gz" | tee -a /logger > /dev/null
 tar -xvzf apache-tomcat-7.0.42.tar.gz
-mv ./sample.war ./apache-tomcat-7.0.42/webapps 
-cd ./apache-tomcat-7.0.42 
+mv ./sample.war ./apache-tomcat-7.0.42/webapps
+cd ./apache-tomcat-7.0.42
 echo "$DT: About to run app" | tee -a /logger > /dev/null
 ./bin/catalina.sh run -config ./conf/server.xml
-echo "$DT: The previous command is blocking so this command should never show up" | tee -a /logger > /dev/null
-#env >> test-env
