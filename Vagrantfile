@@ -39,7 +39,7 @@ Vagrant.configure(2) do |config|
   end
 
   # Increase memory for VMware
-  ["vmware_fusion", "vmware_workstation"].each do |p|
+    ["vmware_fusion", "vmware_workstation"].each do |p|
     config.vm.provider p do |v|
       v.vmx["memsize"] = "4000"
     end
