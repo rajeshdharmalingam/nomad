@@ -1,14 +1,23 @@
 #!/bin/bash
+set -e
+DT=$(date '+%Y/%m/%d %H:%M:%S')
 
 rm -rf *.tar.gz
 rm -rf *.war
-wget http://zjumpbox01.slv.zuora/~dba/cgi-bin/sample-tomcat.tar.gz
-sudo apt-get install default-jre -y
-which java >> test-java
-tar -xvzf sample-tomcat.tar.gz
-cd sample-tomcat
+echo "$DT: Getting apache-tomcat-7.0.42.tar.gz" | tee -a /logger > /dev/null
+wget http://zjumpbox01.slv.zuora/~dba/cgi-bin/sample-tomcat/apache-tomcat-7.0.42.tar.gz
+echo "$DT: Getting sample.war" | tee -a /logger > /dev/null
+wget http://zjumpbox01.slv.zuora/~dba/cgi-bin/sample-tomcat/sample.war
+#sudo apt-get install default-jre -y
+#which java >> test-java
+#echo "$DT: Unzipping sample-tomcat.tar.gz" | tee -a /logger > /dev/null
+#tar -xvzf sample-tomcat.tar.gz
+#cd sample-tomcat
+echo "$DT: Unzipping apache-tomcat-7.0.42.tar.gz" | tee -a /logger > /dev/null
 tar -xvzf apache-tomcat-7.0.42.tar.gz
-mv ./sample.war ./apache-tomcat-7.0.42/webapps
-cd ./apache-tomcat-7.0.42
+mv ./sample.war ./apache-tomcat-7.0.42/webapps 
+cd ./apache-tomcat-7.0.42 
+echo "$DT: About to run app" | tee -a /logger > /dev/null
 ./bin/catalina.sh run -config ./conf/server.xml
-env >> test-env
+echo "$DT: The previous command is blocking so this command should never show up" | tee -a /logger > /dev/null
+#env >> test-env
