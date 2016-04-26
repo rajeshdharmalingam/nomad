@@ -26,8 +26,7 @@ Vagrant.configure(2) do |config|
   config.vm.hostname = "nomad"
   config.vm.provision "shell", inline: $script, privileged: false
   config.vm.provision "docker" # Just install it
-  #config.vm.network "private_network", type: "dhcp"
-  config.vm.network :public_network, :bridge => "en0", auto_config: false
+  config.vm.network :private_network, ip: '10.121.200.190'
 
   # Increase memory for Parallels Desktop
   config.vm.provider "parallels" do |p, o|
@@ -36,8 +35,7 @@ Vagrant.configure(2) do |config|
 
   # Increase memory for Virtualbox
   config.vm.provider "virtualbox" do |vb|
-        vb.memory = "4000"
-        vb.cpus = "6"
+    vb.customize ["modifyvm", :id, "--memory", "4048", "--cpus", "4"]
   end
 
   # Increase memory for VMware
