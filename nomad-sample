@@ -21,9 +21,12 @@ job "sample" {
                                 network {
                                         mbits = 10
                                         port "tomcat" {
-                                            #static = 8080
                                         }
                                 }
+                        }
+                        logs {
+                             max_files     = 1
+                             max_file_size = 5
                         }
                 }
         }
