@@ -13,9 +13,17 @@ wget http://zjumpbox01.slv.zuora/~dba/cgi-bin/sample-tomcat/sample.war
 #echo "$DT: Unzipping sample-tomcat.tar.gz" | tee -a /logger > /dev/null
 #tar -xvzf sample-tomcat.tar.gz
 #cd sample-tomcat
+#echo "$DT: Getting the run-time environment"
+#env >> test-env
+#echo "$DT: ${NOMAD_ADDR_tomcat}" | tee -a /logger > /dev/null
+IFS=':' read -r -a array <<< ${NOMAD_ADDR_tomcat}
+echo "tomcat port is ${array[@]: -1:1}" | tee -a /logger > /dev/null
 echo "$DT: Unzipping apache-tomcat-7.0.42.tar.gz" | tee -a /logger > /dev/null
 tar -xvzf apache-tomcat-7.0.42.tar.gz
+sed -i "s/8080/${array[@]: -1:1}/g" ./apache-tomcat-7.0.42/conf/server.xml
 mv ./sample.war ./apache-tomcat-7.0.42/webapps
 cd ./apache-tomcat-7.0.42
 echo "$DT: About to run app" | tee -a /logger > /dev/null
 ./bin/catalina.sh run -config ./conf/server.xml
+#echo "$DT: The previous command is blocking so this command should never show up" | tee -a /logger > /dev/null
+#env >> test-env
